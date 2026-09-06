@@ -94,11 +94,11 @@ void task2(Array *arr, std::ofstream& output)
         list_[array_get(arr, i)]++;
     }
 
-    int max_ = 0;
+    int max_ = 0;      
 
     for (int i = 0; i < 1001; i++)
     {
-        if (list_[i] > max_)
+        if (list_[i] > max_)  
         {
             max_ = i;
         }
