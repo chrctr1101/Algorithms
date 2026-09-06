@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/ArrayProject.dir/link.d CMakeFiles/ArrayProject.dir/src/lab1.cpp.o -o ArrayProject  libarray_lib.a
