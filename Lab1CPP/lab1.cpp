@@ -31,21 +31,29 @@ void task1(Array *arr, std::ofstream &output)
 
     size_t in;
 
-    for (int i = 0; i < array_size(arr); i++)
-    {
-        in = array_get(arr,i);
-        if (in == 0 || in == 1) {continue;}
-        for (int j = i; j < array_size(arr); j++)
-        {
-            for (int k = array_get(arr, i); k < max_; k++)
-            {
-                if (array_get(arr, j) == in*k) 
-                {
-                    array_set(arr, j,0);
-                }
+    bool* simple = new bool[max_];  
+
+    for (int i = 0; i < max_; i++) {
+        simple[i] = true;
+    }
+    simple[0] = simple[1] = false;
+
+    for (int i = 2; i * i < max_; i++) {
+        if (simple[i]) {
+            for (int j = i * i; j < max_; j += i) {
+                simple[j] = false;
             }
         }
     }
+
+    for (int i = 0; i < array_size(arr); i++) {
+        int n = array_get(arr, i); 
+        if (!simple[n]) {        
+            array_set(arr, i, 0);   
+        }
+    }
+    
+    delete[] simple;
         
     int writePos = 0; 
 
