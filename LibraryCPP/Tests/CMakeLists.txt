@@ -1,26 +1,19 @@
-# add_executable(TestArrayCPP array.cpp)
-# target_include_directories(TestArrayCPP PUBLIC ..)
-# target_link_libraries(TestArrayCPP LibraryCPP)
-# add_test(TestArrayCPP TestArrayCPP)
+cmake_minimum_required(VERSION 3.10)
 
-# add_executable(TestListCPP list.cpp)
-# target_include_directories(TestListCPP PUBLIC ..)
-# target_link_libraries(TestListCPP LibraryCPP)
-# add_test(TestListCPP TestListCPP)
+# Находим все тесты
+file(GLOB TEST_SOURCES "*.cpp")
 
-# add_executable(TestQueueCPP queue.cpp)
-# target_include_directories(TestQueueCPP PUBLIC ..)
-# target_link_libraries(TestQueueCPP LibraryCPP)
-# add_test(TestQueueCPP TestQueueCPP)
-# set_tests_properties(TestQueueCPP PROPERTIES TIMEOUT 10)
+foreach(TEST_SOURCE ${TEST_SOURCES})
+    get_filename_component(TEST_NAME ${TEST_SOURCE} NAME_WE)
+    
+    add_executable(test_${TEST_NAME} ${TEST_SOURCE})
+    
+    # Линкуем библиотеку (она автоматически передаст include пути)
+    target_link_libraries(test_${TEST_NAME} PRIVATE LibraryCPP)
+    
+    message(STATUS "Created test: test_${TEST_NAME}")
+endforeach()
 
-# add_executable(TestStackCPP stack.cpp)
-# target_include_directories(TestStackCPP PUBLIC ..)
-# target_link_libraries(TestStackCPP LibraryCPP)
-# add_test(TestStackCPP TestStackCPP)
-
-# add_executable(TestVectorCPP vector.cpp)
-# target_include_directories(TestVectorCPP PUBLIC ..)
-# target_link_libraries(TestVectorCPP LibraryCPP)
-# add_test(TestVectorCPP TestVectorCPP)
-# set_tests_properties(TestVectorCPP PROPERTIES TIMEOUT 10)
+# Или объединяем все тесты в один
+# add_executable(tests_all ${TEST_SOURCES})
+# target_link_libraries(tests_all PRIVATE LibraryCPP)
