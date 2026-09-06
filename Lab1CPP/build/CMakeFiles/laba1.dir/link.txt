@@ -1,0 +1,1 @@
+/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/laba1.dir/link.d CMakeFiles/laba1.dir/src/lab1.cpp.o -o bin/laba1  libarray_lib.a

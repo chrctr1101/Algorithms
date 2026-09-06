@@ -1,0 +1,5 @@
+/home/chrctr/Algorithms/Lab1CPP/build/CMakeFiles/array_lib.dir
+/home/chrctr/Algorithms/Lab1CPP/build/CMakeFiles/laba1.dir
+/home/chrctr/Algorithms/Lab1CPP/build/CMakeFiles/test.dir
+/home/chrctr/Algorithms/Lab1CPP/build/CMakeFiles/edit_cache.dir
+/home/chrctr/Algorithms/Lab1CPP/build/CMakeFiles/rebuild_cache.dir

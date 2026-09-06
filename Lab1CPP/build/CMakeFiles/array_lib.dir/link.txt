@@ -1,0 +1,2 @@
+/usr/bin/ar qc libarray_lib.a CMakeFiles/array_lib.dir/include/array.cpp.o
+/usr/bin/ranlib libarray_lib.a
