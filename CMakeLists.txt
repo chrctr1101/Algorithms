@@ -16,10 +16,12 @@ target_include_directories(array_lib PUBLIC
 )
 
 # Основная программа
-add_executable(laba1 ${CMAKE_SOURCE_DIR}/Lab1CPP/lab1.cpp)
+add_executable(laba1 
+    ${CMAKE_SOURCE_DIR}/Lab1CPP/lab1.cpp
+)
 target_link_libraries(laba1 array_lib)
 
-# ВКЛЮЧАЕМ ТЕСТЫ
+# Включаем тесты
 enable_testing()
 
 # Функция для добавления тестов
