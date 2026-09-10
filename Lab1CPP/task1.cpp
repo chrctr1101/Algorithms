@@ -114,34 +114,6 @@ void task1(Array *arr, std::ofstream &output)
     std::cout << std::endl;
 }
 
-void task2(Array *arr, std::ofstream& output)
-{
-    int list_[1001];
-
-    for (int i = 0; i < 1001; i++)
-    {
-        list_[i] = 0;
-    }
-
-    for (size_t i = 0; i < array_size(arr); i++)
-    {
-        list_[array_get(arr, i)]++;
-    }
-
-    int max_ = 0;      
-
-    for (int i = 0; i < 1001; i++)
-    {
-        if (list_[i] > max_)  
-        {
-            max_ = i;
-        }
-    }
-
-    std::cout << max_;
-    output << max_;
-}
-
 int main(int argc, char **argv)
 {
     Array *arr = NULL;
@@ -152,13 +124,6 @@ int main(int argc, char **argv)
     task1(arr, output);
     array_delete(arr);
 
-    input.clear();
-    input.seekg(0, std::ios::beg);
-
-    /* Create another array here */
-    arr = array_create_and_read(input);
-    task2(arr, output);
-    array_delete(arr);
     input.close();
     output.close();
 }
