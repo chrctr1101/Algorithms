@@ -59,33 +59,36 @@ void task1(Array *arr, std::ofstream &output)
 
     bool* simple = new bool[max_ + 1];  
 
-    for (int i = 0; i <= max_; i++) {
+    for (int i = 0; i <= max_; i++) 
+    {
         simple[i] = true;
     }
     
     simple[0] = false;
     if (max_ >= 1) simple[1] = false;
 
-    for (int i = 2; i * i <= max_; i++) {
-        if (simple[i]) {
-            for (int j = i * i; j <= max_; j += i) {
+    for (int i = 2; i * i <= max_; i++) 
+    {
+        if (simple[i]) 
+        {
+            for (int j = i * i; j <= max_; j += i) 
+            {
                 simple[j] = false;
             }
         }
     }
 
-    // Заменяем непростые числа на 0
-    for (size_t i = 0; i < size; i++) {
+    for (size_t i = 0; i < size; i++) 
+    {
         int n = array_get(arr, i);
-        // Проверка: если число отрицательное, больше max_ или не простое
-        if (n < 0 || n > max_ || !simple[n]) {
+        if (n < 0 || n > max_ || !simple[n]) 
+        {
             array_set(arr, i, 0);
         }
     }
     
     delete[] simple;
         
-    // Сдвигаем все ненулевые элементы в начало (сохраняя порядок)
     size_t writePos = 0; 
     for (size_t i = 0; i < size; i++) 
     {
@@ -93,15 +96,14 @@ void task1(Array *arr, std::ofstream &output)
         {
             if (i != writePos) 
             {
-                int temp = array_get(arr, i);
-                array_set(arr, i, array_get(arr, writePos));
+                int temp = array_get(arr, i);      
+                array_set(arr, i, 0);              
                 array_set(arr, writePos, temp);
             }
             writePos++;
         }
     }
 
-    // Вывод результата
     for (size_t i = 0; i < size; i++)
     {
         output << array_get(arr, i) << " ";
