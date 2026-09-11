@@ -13,9 +13,7 @@ Array *array_create_and_read(std::ifstream &input)
     /* Read array data */
     for (int i = 0 ; i < n ; ++i)
     {
-        int x;
-        input >> x;
-        array_set(arr, i, x);
+        array_set(arr, i, i+2);
     }
     return arr;
 }
@@ -38,16 +36,19 @@ void task1(Array *arr, std::ofstream &output)
             max_ = val;
     }
 
-    // Если максимальное значение меньше 2, то простых чисел нет
-    if (max_ < 2) {
-        for (size_t i = 0; i < size; i++) {
+    if (max_ < 2) 
+    {
+        for (size_t i = 0; i < size; i++)
+        {
             int n = array_get(arr, i);
-            if (n < 2) {
+            if (n < 2) 
+            {
                 array_set(arr, i, 0);
             }
         }
         // Вывод результата
-        for (size_t i = 0; i < size; i++) {
+        for (size_t i = 0; i < size; i++) 
+        {
             output << array_get(arr, i) << " ";
             std::cout << array_get(arr, i) << " ";
         }
@@ -56,19 +57,15 @@ void task1(Array *arr, std::ofstream &output)
         return;
     }
 
-    // ВАЖНО: выделяем max_ + 1, чтобы иметь доступ к индексу max_
     bool* simple = new bool[max_ + 1];  
 
-    // Инициализация
     for (int i = 0; i <= max_; i++) {
         simple[i] = true;
     }
     
-    // 0 и 1 - не простые числа
     simple[0] = false;
     if (max_ >= 1) simple[1] = false;
 
-    // Решето Эратосфена
     for (int i = 2; i * i <= max_; i++) {
         if (simple[i]) {
             for (int j = i * i; j <= max_; j += i) {
