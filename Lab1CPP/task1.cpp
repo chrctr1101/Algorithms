@@ -57,37 +57,16 @@ void task1(Array *arr, std::ofstream &output)
         return;
     }
 
-    bool* simple = new bool[max_ + 1];  
-
     for (int i = 0; i <= max_; i++) 
-    {
-        simple[i] = true;
-    }
-    
-    simple[0] = false;
-    if (max_ >= 1) simple[1] = false;
+{
+    int val = array_get(arr, i);
+    if (val == 0) continue;     
 
-    for (int i = 2; i * i <= max_; i++) 
+    for (int j = val * val - 2; j <= max_; j += val) 
     {
-        if (simple[i]) 
-        {
-            for (int j = i * i; j <= max_; j += i) 
-            {
-                simple[j] = false;
-            }
-        }
+        array_set(arr, j, 0);
     }
-
-    for (size_t i = 0; i < size; i++) 
-    {
-        int n = array_get(arr, i);
-        if (n < 0 || n > max_ || !simple[n]) 
-        {
-            array_set(arr, i, 0);
-        }
-    }
-    
-    delete[] simple;
+}
         
     size_t writePos = 2; 
     for (size_t i = 2; i < size; i++) 
