@@ -89,8 +89,8 @@ void task1(Array *arr, std::ofstream &output)
     
     delete[] simple;
         
-    size_t writePos = 0; 
-    for (size_t i = 0; i < size; i++) 
+    size_t writePos = 2; 
+    for (size_t i = 2; i < size; i++) 
     {
         if (array_get(arr, i) != 0) 
         {
