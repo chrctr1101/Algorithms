@@ -6,19 +6,14 @@
 
 #include "stack.h"
 
-// ============================================================
-//  Глобальное состояние интерпретатора
-//  Data == char, поэтому стек хранит отдельные символы.
-// ============================================================
-
-static Stack*      st          = nullptr;
-static std::string tilde;                    // переменная ~ (может быть строкой)
-static std::string vars[100];                // переменные по номерам
-static std::string input_data;               // содержимое input-файла
-static size_t      input_pos   = 0;
-static std::string code;                     // исходный код
-static size_t      ip          = 0;
-static bool        running     = true;
+static Stack* st = nullptr;
+static std::string tilde;
+static std::string vars[100];
+static std::string input_data;
+static size_t input_pos = 0;
+static std::string code;
+static size_t ip = 0;
+static bool running = true;
 static std::mt19937 gen(42);
 
 // ============================================================
@@ -71,10 +66,6 @@ static int read_number()
     return sign * val;
 }
 
-// Положить строку в стек так, чтобы ПЕРВЫЙ символ оказался
-// в голове (верх стека), а последний — в хвосте.
-// push_string("abc") -> push 'c', 'b', 'a'.
-// После: голова = 'a', хвост = 'c'. Сверху вниз: a, b, c.
 static void push_string(const std::string& s)
 {
     for (int i = static_cast<int>(s.size()) - 1; i >= 0; --i)
@@ -83,7 +74,6 @@ static void push_string(const std::string& s)
     }
 }
 
-// Снять верхний элемент как строку из одного символа
 static std::string pop_top_string()
 {
     if (stack_empty(st)) return "";
@@ -96,28 +86,17 @@ static std::string combine_stack()
 {
     if (stack_empty(st)) return "";
 
-    Stack* tmp = stack_create();
+    std::string result;
     while (!stack_empty(st))
     {
-        stack_push(tmp, stack_get(st));
+        char c = stack_get(st);
+        result += c;
         stack_pop(st);
     }
-    std::string collected;
-    while (!stack_empty(tmp))
-    {
-        char c = stack_get(tmp);
-        collected += c;
-        stack_push(st, c);
-        stack_pop(tmp);
-    }
-    std::string reversed;
-    for (int i = static_cast<int>(collected.size()) - 1; i >= 0; --i)
-    {
-        reversed += collected[i];
-    }
-    stack_delete(tmp);
-    return reversed;
+    
+    return result;
 }
+
 
 static std::string read_value_arg()
 {
@@ -145,11 +124,7 @@ static std::string read_value_arg()
     return std::string(1, c);
 }
 
-
-
 static void execute_one();
-
-
 
 static void execute_until_pipe()
 {
